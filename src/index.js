@@ -16,7 +16,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     secret: "somesecret",
-    cookie: { maxAge: 60000 * 10 },
+    cookie: { maxAge: 60000 * 10 * 10 },
   })
 );
 // init route
