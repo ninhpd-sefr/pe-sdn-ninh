@@ -63,7 +63,7 @@ class SecctionController {
 
       let newMainTask = false;
       console.log(isMainTask.length);
-      if (isMainTask.length > 1) {
+      if (Array.isArray(isMainTask)) {
         newMainTask = true;
       }
 
