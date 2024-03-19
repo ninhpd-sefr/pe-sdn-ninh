@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Section</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Update Section</h2>
+    <form id="sectionFormUpdate" action="/section/update/<%= sectionDetail._id %>" method="POST">
+        <div class="form-group">
+            <label for="sectionName">Section Name:</label>
+            <input type="text" class="form-control" id="sectionName" name="sectionName" value="<%= sectionDetail.sectionName %>" required>
+        </div>
+        <div class="form-group">
+            <label for="sectionDescription">Description:</label>
+            <textarea class="form-control" id="sectionDescription" name="sectionDescription" required><%= sectionDetail.sectionDescription %></textarea>
+        </div>
+        <div class="form-group">
+            <label for="duration">Duration:</label>
+            <input type="number" class="form-control" id="duration" name="duration" value="<%= sectionDetail.duration %>" required>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="isMainTask" name="isMainTask" value="true" <% if (sectionDetail.isMainTask) { %>checked<% } %>>
+            <label class="form-check-label" for="isMainTask">Is Main Task</label>
+        </div>
+        <div class="form-group">
+            <label for="courseSelect">Select Course:</label>
+            <select class="form-control" id="courseSelect" name="course" required>
+                <% courses.forEach(course => { %>
+                <option value="<%= course._id %>" <% if (sectionDetail.course._id.toString() === course._id.toString()) { %>selected<% } %>><%= course.courseName %></option>
+                <% }); %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Section</button>
+    </form>
+</div>
+<!-- Bootstrap JS (Optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Script để xử lý validation -->
+<script>
+ document.getElementById("sectionFormUpdate").addEventListener("submit", function (event) {
+        
+        const sectionNameInput = document.getElementById("sectionName");
+        let sectionName = sectionNameInput.value.trim();
+        const sectionDescription = document.getElementById("sectionDescription").value.trim();
+        const duration = document.getElementById("duration").value.trim();
+        const courseId = document.getElementById("courseSelect").value;
+       
+
+       
+        if (!sectionName || !sectionDescription || !duration || !courseId) {
+            alert("All fields are required");
+            event.preventDefault();
+            return;
+        }
+
+        // Kiểm tra xem tên phần có chứa các ký tự không hợp lệ không
+        // Validate if sectionName contains only allowed characters
+        const validCharacters =  /^[a-zA-Z0-9\/\s]*$/;
+        if (!validCharacters.test(sectionName)) {
+            alert("Section name contains invalid characters. Only letters, spaces, / and digits are allowed.");
+            event.preventDefault();
+            return;
+        }
+
+        // Validate if each word in sectionName begins with a capital letter
+        const words = sectionName.split(/\s+/);
+        for (let i = 0; i < words.length; i++) {
+            // Check if the first letter of the word is uppercase
+            if (words[i].charAt(0) !== words[i].charAt(0).toUpperCase()) {
+                alert("Section name is invalid. Each word must begin with a capital letter.");
+                event.preventDefault();
+                return false;
+            }
+        }
+
+    });
+ </script>
+</body>
+</html>

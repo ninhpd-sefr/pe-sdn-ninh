@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Authentication</title>
+    <!-- Liên kết tới Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Tùy chỉnh CSS (nếu cần) */
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <!-- Form đăng ký -->
+          <form action="/register" method="post" class="border p-4 rounded">
+            <h2 class="mb-4">Register</h2>
+            <div class="form-group">
+              <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Username"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Password"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Register
+            </button>
+          </form>
+
+          <!-- Link đến trang đăng nhập -->
+          <div class="text-center mt-3">
+            <a href="/login">Already have an account? Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liên kết tới Bootstrap JavaScript (trước thẻ </body>) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
